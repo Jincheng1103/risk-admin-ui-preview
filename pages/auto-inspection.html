@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自动巡检 - 融资风控后台</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/auto-inspection.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="auto-inspection.html">
+        <img class="brand-mark" src="../assets/images/risk-admin-icon.svg" alt="">
+        <span>
+          <span class="brand-title">融资风控后台</span>
+          <span class="brand-sub">Risk Control</span>
+        </span>
+      </a>
+      <div class="nav-label">风控工作台</div>
+      <nav class="nav">
+        <a class="nav-item is-active" href="auto-inspection.html"><span class="nav-dot"></span>自动巡检</a>
+        <a class="nav-item" href="manual-query.html"><span class="nav-dot"></span>手动查询</a>
+        <a class="nav-item" href="run-records.html"><span class="nav-dot"></span>运行记录</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 class="page-title">自动巡检</h1>
+          <div class="page-subtitle">展示最新或指定批次的店铺风控巡检结果</div>
+        </div>
+        <div class="topbar-meta" id="latest-inspection-time"></div>
+      </header>
+
+      <section class="page-content is-wide">
+        <div class="summary-grid" id="summary-grid"></div>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">筛选条件</h2>
+          </div>
+          <div class="panel-body">
+            <form class="filter-grid" id="inspection-filter">
+              <div class="field">
+                <label for="inspection-date">巡检日期</label>
+                <input class="control" id="inspection-date" name="inspectionDate" type="date" value="2026-07-03">
+              </div>
+              <div class="field">
+                <label for="platform">平台</label>
+                <select class="control" id="platform" name="platform">
+                  <option value="">全部平台</option>
+                  <option value="抖音">抖音</option>
+                  <option value="快手">快手</option>
+                  <option value="拼多多">拼多多</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="risk-level">风险等级</label>
+                <select class="control" id="risk-level" name="riskLevel">
+                  <option value="">全部等级</option>
+                  <option value="normal">正常</option>
+                  <option value="watch">关注</option>
+                  <option value="high">高风险</option>
+                  <option value="critical">严重风险</option>
+                  <option value="unable">无法判断</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="data-status">数据状态</label>
+                <select class="control" id="data-status" name="dataStatus">
+                  <option value="">全部状态</option>
+                  <option value="complete">完整</option>
+                  <option value="partial_missing">部分缺失</option>
+                  <option value="critical_missing">关键缺失</option>
+                  <option value="api_failed">接口失败</option>
+                  <option value="auth_failed">授权失败</option>
+                  <option value="stale">数据过期</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="keyword">关键词</label>
+                <input class="control" id="keyword" name="keyword" type="search" placeholder="店铺 / 商户 / 店铺ID">
+              </div>
+              <div class="filter-actions">
+                <button class="btn btn-secondary" type="reset">重置</button>
+                <button class="btn btn-primary" type="submit">查询</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">店铺巡检结果</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table auto-table">
+              <colgroup>
+                <col class="col-store">
+                <col class="col-platform">
+                <col class="col-risk">
+                <col class="col-asset">
+                <col class="col-loan">
+                <col class="col-status">
+                <col class="col-time">
+                <col class="col-action">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>店铺/商户</th>
+                  <th>平台</th>
+                  <th>风险等级</th>
+                  <th>可回款资产</th>
+                  <th>放款参考金额</th>
+                  <th>数据状态</th>
+                  <th>数据快照时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="inspection-table-body"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="inspection-pagination"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/core/config.js"></script>
+  <script src="../assets/js/core/request.js"></script>
+  <script src="../assets/js/utils/enums.js"></script>
+  <script src="../assets/js/utils/format.js"></script>
+  <script src="../assets/js/utils/query.js"></script>
+  <script src="../assets/js/utils/dom.js"></script>
+  <script src="../assets/js/mock/store.mock.js"></script>
+  <script src="../assets/js/mock/inspection.mock.js"></script>
+  <script src="../assets/js/mock/report.mock.js"></script>
+  <script src="../assets/js/api/store-api.js"></script>
+  <script src="../assets/js/api/risk-api.js"></script>
+  <script src="../assets/js/adapters/store-adapter.js"></script>
+  <script src="../assets/js/adapters/inspection-adapter.js"></script>
+  <script src="../assets/js/pages/auto-inspection.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>风险报告 - 融资风控后台</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/report-detail.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="auto-inspection.html">
+        <img class="brand-mark" src="../assets/images/risk-admin-icon.svg" alt="">
+        <span>
+          <span class="brand-title">融资风控后台</span>
+          <span class="brand-sub">Risk Control</span>
+        </span>
+      </a>
+      <div class="nav-label">风控工作台</div>
+      <nav class="nav">
+        <a class="nav-item" href="auto-inspection.html"><span class="nav-dot"></span>自动巡检</a>
+        <a class="nav-item" href="manual-query.html"><span class="nav-dot"></span>手动查询</a>
+        <a class="nav-item" href="run-records.html"><span class="nav-dot"></span>运行记录</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="report-head">
+          <button class="btn btn-secondary" id="back-button" type="button">返回</button>
+          <div>
+            <h1 class="page-title" id="report-title">风险报告</h1>
+            <div class="page-subtitle" id="report-subtitle"></div>
+          </div>
+        </div>
+        <div class="topbar-meta" id="report-snapshot"></div>
+      </header>
+
+      <section class="page-content is-wide">
+        <div id="conclusion-panel"></div>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">金额与资产口径</h2>
+          </div>
+          <div class="amount-grid" id="amount-basis"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">主要风险事件与证据</h2>
+          </div>
+          <div class="panel-body">
+            <div class="risk-list" id="risk-events"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">运营核实事项</h2>
+          </div>
+          <div class="panel-body">
+            <div class="verify-list" id="verify-items"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">数据缺失或证据不足</h2>
+          </div>
+          <div class="panel-body">
+            <div class="issue-list" id="data-issues"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">更多信息</h2>
+          </div>
+          <div class="panel-body">
+            <div class="fold-list" id="more-info"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/core/config.js"></script>
+  <script src="../assets/js/core/request.js"></script>
+  <script src="../assets/js/utils/enums.js"></script>
+  <script src="../assets/js/utils/format.js"></script>
+  <script src="../assets/js/utils/query.js"></script>
+  <script src="../assets/js/utils/dom.js"></script>
+  <script src="../assets/js/mock/store.mock.js"></script>
+  <script src="../assets/js/mock/inspection.mock.js"></script>
+  <script src="../assets/js/mock/report.mock.js"></script>
+  <script src="../assets/js/api/risk-api.js"></script>
+  <script src="../assets/js/adapters/report-adapter.js"></script>
+  <script src="../assets/js/pages/report-detail.js"></script>
+</body>
+</html>

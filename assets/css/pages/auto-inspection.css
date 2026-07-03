@@ -1,0 +1,28 @@
+.auto-table .col-store {
+  width: 20%;
+}
+
+.auto-table .col-platform {
+  width: 9%;
+}
+
+.auto-table .col-risk {
+  width: 9%;
+}
+
+.auto-table .col-asset,
+.auto-table .col-loan {
+  width: 13%;
+}
+
+.auto-table .col-status {
+  width: 10%;
+}
+
+.auto-table .col-time {
+  width: 15%;
+}
+
+.auto-table .col-action {
+  width: 11%;
+}

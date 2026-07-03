@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>运行记录 - 融资风控后台</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/run-records.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="auto-inspection.html">
+        <img class="brand-mark" src="../assets/images/risk-admin-icon.svg" alt="">
+        <span>
+          <span class="brand-title">融资风控后台</span>
+          <span class="brand-sub">Risk Control</span>
+        </span>
+      </a>
+      <div class="nav-label">风控工作台</div>
+      <nav class="nav">
+        <a class="nav-item" href="auto-inspection.html"><span class="nav-dot"></span>自动巡检</a>
+        <a class="nav-item" href="manual-query.html"><span class="nav-dot"></span>手动查询</a>
+        <a class="nav-item is-active" href="run-records.html"><span class="nav-dot"></span>运行记录</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 class="page-title">运行记录</h1>
+          <div class="page-subtitle">查看巡检和重新分析任务的执行状态</div>
+        </div>
+      </header>
+
+      <section class="page-content is-wide">
+        <div class="summary-grid" id="records-summary"></div>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">筛选条件</h2>
+          </div>
+          <div class="panel-body">
+            <form class="filter-grid" id="records-filter">
+              <div class="field">
+                <label for="task-date">任务日期</label>
+                <input class="control" id="task-date" name="taskDate" type="date">
+              </div>
+              <div class="field">
+                <label for="trigger-type">触发方式</label>
+                <select class="control" id="trigger-type" name="triggerType">
+                  <option value="">全部方式</option>
+                  <option value="scheduled">定时巡检</option>
+                  <option value="rerun">重新分析</option>
+                  <option value="manual_trigger">手动触发</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="task-status">执行状态</label>
+                <select class="control" id="task-status" name="taskStatus">
+                  <option value="">全部状态</option>
+                  <option value="success">成功</option>
+                  <option value="partial_failed">部分失败</option>
+                  <option value="failed">失败</option>
+                  <option value="running">执行中</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="records-keyword">关键词</label>
+                <input class="control" id="records-keyword" name="keyword" type="search" placeholder="任务ID / 批次 / 店铺">
+              </div>
+              <div class="filter-actions">
+                <button class="btn btn-secondary" type="reset">重置</button>
+                <button class="btn btn-primary" type="submit">查询</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">任务记录</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table records-table">
+              <colgroup>
+                <col class="col-task">
+                <col class="col-trigger">
+                <col class="col-scope">
+                <col class="col-status">
+                <col class="col-result">
+                <col class="col-report">
+                <col class="col-snapshot">
+                <col class="col-duration">
+                <col class="col-fail">
+                <col class="col-action">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>任务/批次</th>
+                  <th>触发方式</th>
+                  <th>巡检范围</th>
+                  <th>执行状态</th>
+                  <th>结果统计</th>
+                  <th>报告生成</th>
+                  <th>数据快照时间</th>
+                  <th>执行时间</th>
+                  <th>失败原因</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="records-table-body"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="records-pagination"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-mask" id="modal-mask">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title"></h2>
+        <button class="btn btn-text" data-modal-close>关闭</button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/config.js"></script>
+  <script src="../assets/js/core/request.js"></script>
+  <script src="../assets/js/utils/enums.js"></script>
+  <script src="../assets/js/utils/format.js"></script>
+  <script src="../assets/js/utils/query.js"></script>
+  <script src="../assets/js/utils/dom.js"></script>
+  <script src="../assets/js/mock/run-records.mock.js"></script>
+  <script src="../assets/js/api/risk-api.js"></script>
+  <script src="../assets/js/adapters/run-record-adapter.js"></script>
+  <script src="../assets/js/pages/run-records.js"></script>
+</body>
+</html>

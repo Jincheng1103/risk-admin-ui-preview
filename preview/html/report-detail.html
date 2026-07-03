@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星澜生鲜优选 - 风险报告</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --panel: #ffffff;
+            --line: #dde6f1;
+            --line-soft: #edf2f7;
+            --text: #172033;
+            --muted: #657287;
+            --subtle: #8a96a8;
+            --brand: #145c63;
+            --brand-dark: #10292d;
+            --green: #16845f;
+            --amber: #b86b11;
+            --red: #c23a3a;
+            --violet: #6655cc;
+            --shadow: 0 16px 42px rgba(20, 37, 63, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+            letter-spacing: 0;
+        }
+
+        .screen {
+            width: 1440px;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 224px 1fr;
+            background:
+                linear-gradient(180deg, rgba(20, 92, 99, 0.05) 0, rgba(244, 247, 251, 0) 260px),
+                var(--bg);
+        }
+
+        .sidebar {
+            background: var(--brand-dark);
+            color: #d8e8ea;
+            padding: 28px 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 38px;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #ffffff, #a8d8d9);
+            position: relative;
+        }
+
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 9px;
+            width: 18px;
+            height: 20px;
+            border: 3px solid #145c63;
+            border-top: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .brand-title {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 760;
+            line-height: 1.2;
+        }
+
+        .brand-sub {
+            margin-top: 3px;
+            color: #94bec3;
+            font-size: 12px;
+        }
+
+        .nav-label {
+            color: #7fa8ad;
+            font-size: 12px;
+            margin: 0 12px 10px;
+        }
+
+        .nav-item {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 13px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: #c4dcdf;
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .nav-item.active {
+            background: #1c464b;
+            color: #ffffff;
+            box-shadow: inset 3px 0 0 #71d0d2;
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .topbar {
+            height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            background: rgba(255, 255, 255, 0.78);
+            border-bottom: 1px solid var(--line-soft);
+            backdrop-filter: blur(12px);
+        }
+
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back {
+            height: 34px;
+            padding: 0 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+            color: #344054;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .title h1 {
+            margin: 0;
+            font-size: 23px;
+            line-height: 1.1;
+            font-weight: 780;
+        }
+
+        .title p {
+            margin: 7px 0 0;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .chip {
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 11px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #ffffff;
+            color: var(--muted);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .chip-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+
+        .content {
+            padding: 26px 32px 56px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .panel-head {
+            min-height: 54px;
+            padding: 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 760;
+        }
+
+        .panel-body { padding: 18px; }
+
+        .overview {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 14px;
+        }
+
+        .store-card {
+            background: #ffffff;
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .store-name {
+            font-size: 21px;
+            font-weight: 780;
+            margin-bottom: 8px;
+        }
+
+        .store-meta {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .meta-item {
+            min-height: 66px;
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            background: #ffffff;
+            padding: 11px 12px;
+        }
+
+        .meta-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .meta-value {
+            color: #152238;
+            font-size: 15px;
+            font-weight: 760;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            height: 24px;
+            border-radius: 6px;
+            padding: 0 8px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .tag.high {
+            color: #a52e2e;
+            background: #fff0ee;
+            border: 1px solid #ffd7d2;
+        }
+
+        .tag.medium {
+            color: #9b5a0f;
+            background: #fff6e8;
+            border: 1px solid #f8ddb8;
+        }
+
+        .tag.good {
+            color: #16714f;
+            background: #ecf8f1;
+            border: 1px solid #c8ecd8;
+        }
+
+        .tag.data {
+            color: #5745b8;
+            background: #f1efff;
+            border: 1px solid #dcd6ff;
+        }
+
+        .tag.gray {
+            color: #667085;
+            background: #f2f4f7;
+            border: 1px solid #e4e7ec;
+        }
+
+        .summary-card {
+            border: 1px solid rgba(194, 58, 58, 0.22);
+            background: #fff8f7;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .summary-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .summary-title h2 {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .summary-text {
+            color: #5f3f3a;
+            font-size: 14px;
+            line-height: 1.8;
+            max-height: 78px;
+            overflow: hidden;
+        }
+
+        .summary-card.expanded .summary-text {
+            max-height: none;
+        }
+
+        .expand-link {
+            display: inline-flex;
+            border: 0;
+            padding: 0;
+            background: transparent;
+            cursor: pointer;
+            margin-top: 10px;
+            color: var(--brand);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 760;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .amount-card {
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            background: #ffffff;
+            padding: 14px;
+        }
+
+        .amount-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .amount-value {
+            color: #111f35;
+            font-size: 20px;
+            font-weight: 780;
+            line-height: 1.1;
+        }
+
+        .amount-note {
+            color: var(--subtle);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 16px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            height: 40px;
+            padding: 0 12px;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--line-soft);
+            color: #5f6b7b;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .table td {
+            min-height: 52px;
+            padding: 12px;
+            border-bottom: 1px solid var(--line-soft);
+            color: #25344d;
+            font-size: 13px;
+            vertical-align: top;
+            line-height: 1.55;
+        }
+
+        .table tr:last-child td { border-bottom: 0; }
+
+        .money {
+            color: #111f35;
+            font-weight: 760;
+            white-space: nowrap;
+        }
+
+        .risk-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .risk-card {
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            padding: 13px;
+            background: #ffffff;
+        }
+
+        .risk-card-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+
+        .risk-name {
+            font-size: 14px;
+            font-weight: 760;
+        }
+
+        .risk-desc {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .risk-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .mini-field {
+            background: #f8fafc;
+            border: 1px solid var(--line-soft);
+            border-radius: 6px;
+            padding: 8px;
+        }
+
+        .mini-label {
+            color: var(--subtle);
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .mini-value {
+            color: #24324a;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .check-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .check-item {
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            padding: 12px;
+            background: #ffffff;
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            gap: 10px;
+            color: #344054;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .check-index {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: #e8f5f6;
+            color: var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 760;
+        }
+
+        .folded {
+            background: #ffffff;
+            border: 1px solid var(--line-soft);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .folded-row {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            border-bottom: 1px solid var(--line-soft);
+        }
+
+        .folded-row:last-child { border-bottom: 0; }
+
+        .folded-title {
+            font-size: 14px;
+            font-weight: 760;
+        }
+
+        .folded-desc {
+            color: var(--muted);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-mark"></div>
+                <div>
+                    <div class="brand-title">融资风控</div>
+                    <div class="brand-sub">Risk Inspection</div>
+                </div>
+            </div>
+
+            <div class="nav-label">主页面</div>
+            <div class="nav-item active"><span class="nav-dot"></span>自动巡检</div>
+            <div class="nav-item"><span class="nav-dot"></span>手动查询</div>
+            <div class="nav-item"><span class="nav-dot"></span>运行记录</div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="title-wrap">
+                    <div class="back">返回</div>
+                    <div class="title">
+                        <h1>星澜生鲜优选</h1>
+                        <p>威海冠森 · 抖音 · 第三方店铺 ID 2356777</p>
+                    </div>
+                </div>
+                <div class="chip"><span class="chip-dot"></span>数据快照时间：2026-07-03 03:12</div>
+            </header>
+
+            <section class="content">
+                <section class="overview">
+                    <div class="store-card">
+                        <div>
+                            <div class="store-name">星澜生鲜优选</div>
+                            <div class="store-meta">
+                                巡检批次：BATCH-20260703-0300<br />
+                                当前风险等级：高风险 · 建议动作：谨慎放款 / 人工核实
+                            </div>
+                        </div>
+                        <span class="tag high">高风险</span>
+                    </div>
+
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <div class="meta-label">数据状态</div>
+                            <div class="meta-value">部分缺失</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">已放款敞口</div>
+                            <div class="meta-value">¥86,600</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">可回款资产</div>
+                            <div class="meta-value">¥128,600</div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">放款参考金额</div>
+                            <div class="meta-value">¥42,000</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="summary-card" id="summaryCard">
+                    <div class="summary-title">
+                        <h2>今日结论</h2>
+                        <span class="tag high">高风险</span>
+                    </div>
+                    <div class="summary-text" id="summaryText">
+                        今日巡检结论为高风险。规则引擎识别到售后退款异常上升，并且部分结算数据存在缺失；本报告保留可计算结果，同时在数据缺失处标记无法估算原因。以下金额和建议仅作为原业务流程中的放款参考。运营需重点核实售后退款是否继续扩大、结算数据缺失原因，以及相关订单是否仍可作为放款参考资产。
+                    </div>
+                    <button class="expand-link" type="button" aria-expanded="false" aria-controls="summaryText" id="summaryToggle">展开全文</button>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title">金额与资产口径</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="amount-grid">
+                            <div class="amount-card">
+                                <div class="amount-label">待结算货款</div>
+                                <div class="amount-value">¥186,000</div>
+                                <div class="amount-note">平台或业务系统提供</div>
+                            </div>
+                            <div class="amount-card">
+                                <div class="amount-label">预计风险扣减</div>
+                                <div class="amount-value" style="color: var(--red);">¥22,400</div>
+                                <div class="amount-note">规则引擎输出</div>
+                            </div>
+                            <div class="amount-card">
+                                <div class="amount-label">可回款资产</div>
+                                <div class="amount-value">¥128,600</div>
+                                <div class="amount-note">按配置口径计算</div>
+                            </div>
+                            <div class="amount-card">
+                                <div class="amount-label">已放款敞口</div>
+                                <div class="amount-value">¥86,600</div>
+                                <div class="amount-note">当前尚未回收</div>
+                            </div>
+                            <div class="amount-card">
+                                <div class="amount-label">放款参考金额</div>
+                                <div class="amount-value">¥42,000</div>
+                                <div class="amount-note">仅作为参考</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section-grid">
+                    <section class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title">主要风险事件与证据</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="risk-list">
+                                <div class="risk-card">
+                                    <div class="risk-card-head">
+                                        <div class="risk-name">R05 售后退款风险上升</div>
+                                        <span class="tag high">高风险</span>
+                                    </div>
+                                    <div class="risk-desc">近 7 日售后退款率高于近 30 日均值，规则引擎判断可能影响可回款资产质量。</div>
+                                    <div class="risk-fields">
+                                        <div class="mini-field">
+                                            <div class="mini-label">影响类型</div>
+                                            <div class="mini-value">金额缩水</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">影响金额</div>
+                                            <div class="mini-value">¥22,400</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">数据时间</div>
+                                            <div class="mini-value">2026-07-03 03:12</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="risk-card">
+                                    <div class="risk-card-head">
+                                        <div class="risk-name">R18 平台扣款与冻结待确认</div>
+                                        <span class="tag medium">关注</span>
+                                    </div>
+                                    <div class="risk-desc">部分平台扣款或冻结数据未完整返回，本次不直接确认为商户风险，但降低结论确定性。</div>
+                                    <div class="risk-fields">
+                                        <div class="mini-field">
+                                            <div class="mini-label">影响类型</div>
+                                            <div class="mini-value">数据不足</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">影响金额</div>
+                                            <div class="mini-value">无法估算</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">数据时间</div>
+                                            <div class="mini-value">2026-07-03 03:12</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="risk-card">
+                                    <div class="risk-card-head">
+                                        <div class="risk-name">R30 数据质量风险</div>
+                                        <span class="tag data">部分缺失</span>
+                                    </div>
+                                    <div class="risk-desc">结算明细存在字段缺失，报告已标记缺失字段和影响；数据缺失不直接等同于业务风险。</div>
+                                    <div class="risk-fields">
+                                        <div class="mini-field">
+                                            <div class="mini-label">缺失范围</div>
+                                            <div class="mini-value">结算明细</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">处理方式</div>
+                                            <div class="mini-value">简化说明</div>
+                                        </div>
+                                        <div class="mini-field">
+                                            <div class="mini-label">数据时间</div>
+                                            <div class="mini-value">2026-07-03 03:12</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <div class="panel-head">
+                            <div class="panel-title">运营核实事项</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="check-list">
+                                <div class="check-item">
+                                    <div class="check-index">1</div>
+                                    <div>核实近 7 日售后退款是否继续扩大，并确认退款是否集中在核心商品或特定订单批次。</div>
+                                </div>
+                                <div class="check-item">
+                                    <div class="check-index">2</div>
+                                    <div>核实结算数据缺失原因，确认是否为接口延迟、授权问题或平台侧结算状态变化。</div>
+                                </div>
+                                <div class="check-item">
+                                    <div class="check-index">3</div>
+                                    <div>核实相关订单是否仍可作为放款参考资产，避免重复扣减或重复融资。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title">数据缺失或证据不足说明</div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>数据域</th>
+                                <th>状态</th>
+                                <th>数据时间</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>订单</td>
+                                <td><span class="tag good">完整</span></td>
+                                <td>2026-07-03 03:12</td>
+                                <td>订单数据可用于本次巡检。</td>
+                            </tr>
+                            <tr>
+                                <td>售后</td>
+                                <td><span class="tag good">完整</span></td>
+                                <td>2026-07-03 03:12</td>
+                                <td>售后数据已进入风险事件证据。</td>
+                            </tr>
+                            <tr>
+                                <td>结算</td>
+                                <td><span class="tag data">部分缺失</span></td>
+                                <td>2026-07-03 03:12</td>
+                                <td>部分结算字段缺失，本报告已标记无法估算说明。</td>
+                            </tr>
+                            <tr>
+                                <td>平台扣款/冻结</td>
+                                <td><span class="tag data">证据不足</span></td>
+                                <td>2026-07-03 03:12</td>
+                                <td>不直接作为商户风险扣减，需运营核实。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="panel">
+                    <div class="panel-head">
+                        <div class="panel-title">更多信息</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="folded">
+                            <div class="folded-row">
+                                <div>
+                                    <div class="folded-title">影响对象</div>
+                                    <div class="folded-desc">查看关联订单、售后、结算、账户等对象。</div>
+                                </div>
+                                <span class="tag gray">展开</span>
+                            </div>
+                            <div class="folded-row">
+                                <div>
+                                    <div class="folded-title">历史变化</div>
+                                    <div class="folded-desc">查看该店铺历次巡检等级、风险事件和金额变化。</div>
+                                </div>
+                                <span class="tag gray">展开</span>
+                            </div>
+                            <div class="folded-row">
+                                <div>
+                                    <div class="folded-title">报告生成信息</div>
+                                    <div class="folded-desc">报告 ID、报告类型、规则版本、资产口径版本、报告模板版本、Agent 提示词版本。</div>
+                                </div>
+                                <span class="tag gray">展开</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+    </div>
+    <script>
+        const summaryCard = document.getElementById('summaryCard');
+        const summaryToggle = document.getElementById('summaryToggle');
+
+        summaryToggle.addEventListener('click', () => {
+            const expanded = summaryCard.classList.toggle('expanded');
+            summaryToggle.textContent = expanded ? '收起全文' : '展开全文';
+            summaryToggle.setAttribute('aria-expanded', String(expanded));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手动查询 - 融资风控后台</title>
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/reset.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/pages/manual-query.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="auto-inspection.html">
+        <img class="brand-mark" src="../assets/images/risk-admin-icon.svg" alt="">
+        <span>
+          <span class="brand-title">融资风控后台</span>
+          <span class="brand-sub">Risk Control</span>
+        </span>
+      </a>
+      <div class="nav-label">风控工作台</div>
+      <nav class="nav">
+        <a class="nav-item" href="auto-inspection.html"><span class="nav-dot"></span>自动巡检</a>
+        <a class="nav-item is-active" href="manual-query.html"><span class="nav-dot"></span>手动查询</a>
+        <a class="nav-item" href="run-records.html"><span class="nav-dot"></span>运行记录</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 class="page-title">手动查询</h1>
+          <div class="page-subtitle">查询店铺最新巡检结果，并预留单店重新分析入口</div>
+        </div>
+        <div class="topbar-meta" id="manual-total"></div>
+      </header>
+
+      <section class="page-content is-wide">
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">筛选条件</h2>
+          </div>
+          <div class="panel-body">
+            <form class="filter-grid" id="manual-filter">
+              <div class="field">
+                <label for="manual-keyword">关键词</label>
+                <input class="control" id="manual-keyword" name="keyword" type="search" placeholder="店铺 / 商户 / 第三方ID">
+              </div>
+              <div class="field">
+                <label for="manual-platform">平台</label>
+                <select class="control" id="manual-platform" name="platform">
+                  <option value="">全部平台</option>
+                  <option value="抖音">抖音</option>
+                  <option value="快手">快手</option>
+                  <option value="拼多多">拼多多</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="manual-scope">巡检范围</label>
+                <select class="control" id="manual-scope" name="scope">
+                  <option value="">全部店铺</option>
+                  <option value="巡检范围内">巡检范围内</option>
+                  <option value="非自动巡检范围">非自动巡检范围</option>
+                </select>
+              </div>
+              <div class="filter-actions">
+                <button class="btn btn-secondary" type="reset">重置</button>
+                <button class="btn btn-primary" type="submit">查询</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">店铺列表</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table manual-table">
+              <colgroup>
+                <col class="col-store">
+                <col class="col-platform">
+                <col class="col-third-id">
+                <col class="col-scope">
+                <col class="col-risk">
+                <col class="col-loan">
+                <col class="col-status">
+                <col class="col-time">
+                <col class="col-action">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>店铺/商户</th>
+                  <th>平台</th>
+                  <th>第三方店铺ID</th>
+                  <th>巡检范围</th>
+                  <th>风险等级</th>
+                  <th>放款参考金额</th>
+                  <th>数据状态</th>
+                  <th>最新巡检时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="manual-table-body"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="manual-pagination"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-mask" id="modal-mask">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title"></h2>
+        <button class="btn btn-text" data-modal-close>关闭</button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/config.js"></script>
+  <script src="../assets/js/core/request.js"></script>
+  <script src="../assets/js/utils/enums.js"></script>
+  <script src="../assets/js/utils/format.js"></script>
+  <script src="../assets/js/utils/query.js"></script>
+  <script src="../assets/js/utils/dom.js"></script>
+  <script src="../assets/js/mock/store.mock.js"></script>
+  <script src="../assets/js/mock/inspection.mock.js"></script>
+  <script src="../assets/js/mock/report.mock.js"></script>
+  <script src="../assets/js/api/store-api.js"></script>
+  <script src="../assets/js/api/risk-api.js"></script>
+  <script src="../assets/js/adapters/store-adapter.js"></script>
+  <script src="../assets/js/adapters/inspection-adapter.js"></script>
+  <script src="../assets/js/pages/manual-query.js"></script>
+</body>
+</html>

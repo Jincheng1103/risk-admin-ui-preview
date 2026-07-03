@@ -1,0 +1,40 @@
+.manual-table .col-store {
+  width: 17%;
+}
+
+.manual-table .col-platform {
+  width: 7%;
+}
+
+.manual-table .col-third-id {
+  width: 12%;
+}
+
+.manual-table .col-scope {
+  width: 10%;
+}
+
+.manual-table .col-risk {
+  width: 8%;
+}
+
+.manual-table .col-loan {
+  width: 11%;
+}
+
+.manual-table .col-status {
+  width: 10%;
+}
+
+.manual-table .col-time {
+  width: 12%;
+}
+
+.manual-table .col-action {
+  width: 13%;
+}
+
+.rerun-message {
+  display: grid;
+  gap: 12px;
+}

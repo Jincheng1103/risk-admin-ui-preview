@@ -1,0 +1,66 @@
+.records-table .col-task {
+  width: 15%;
+}
+
+.records-table .col-trigger {
+  width: 8%;
+}
+
+.records-table .col-scope {
+  width: 8%;
+}
+
+.records-table .col-status {
+  width: 8%;
+}
+
+.records-table .col-result {
+  width: 9%;
+}
+
+.records-table .col-report {
+  width: 9%;
+}
+
+.records-table .col-snapshot {
+  width: 9%;
+}
+
+.records-table .col-duration {
+  width: 13%;
+}
+
+.records-table .col-fail {
+  width: 8%;
+}
+
+.records-table .col-action {
+  width: 14%;
+}
+
+.failure-list {
+  display: grid;
+  gap: 10px;
+}
+
+.failure-card {
+  padding: 13px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  background: var(--panel-muted);
+}
+
+.failure-card-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-weight: 740;
+}
+
+.record-time {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+  line-height: 1.55;
+}
